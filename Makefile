@@ -1,3 +1,6 @@
+brain-even:
+	npx babel-node src/bin/brain-even.js
+
 unstall:
 	npm install
 
