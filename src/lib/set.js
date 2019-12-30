@@ -1,33 +1,41 @@
 #!/usr/bin/env node
 import checkingUserResponseEven from '../games/even';
 import checkingUserResponseCalc from '../games/calc';
+import checkingUserResponseGcd from '../games/gcd';
 import * as lib from './lib';
 
 
 export const gameDescription = (gameName) => {
-  let greeting;
+  let description;
   switch (gameName) {
     case 'even':
-      greeting = 'Answer "yes" if the number is even, otherwise answer "no"';
+      description = 'Answer "yes" if the number is even, otherwise answer "no"';
       break;
 
     case 'calc':
-      greeting = 'What is the result of the expression?';
+      description = 'What is the result of the expression?';
+      break;
+
+    case 'gcd':
+      description = 'Find the greatest common divisor of given numbers';
       break;
 
     default:
       return console.log('GameName Error "Description"');
   }
-  return greeting;
+  return description;
 };
 
 export const gameCall = (gameName) => {
   switch (gameName) {
     case 'even':
-      return checkingUserResponseEven(lib.numberRandom());
+      return checkingUserResponseEven(lib.getRandomInt(100) + 1);
 
     case 'calc':
-      return checkingUserResponseCalc(lib.numberRandom())(lib.numberRandom());
+      return checkingUserResponseCalc(lib.getRandomInt(100))(lib.getRandomInt(100));
+
+    case 'gcd':
+      return checkingUserResponseGcd(lib.getRandomInt(100) + 1)(lib.getRandomInt(100) + 1);
 
     default:
       return console.log('GameName Error "Call"');

@@ -5,6 +5,7 @@ const randomOperation = (operand1) => (operand2) => {
   const random = lib.getRandomInt(3);
   let answer;
   let result;
+
   switch (random) {
     case 0:
       answer = `${operand1} + ${operand2}`;
@@ -24,15 +25,14 @@ const randomOperation = (operand1) => (operand2) => {
     default:
       return console.log('GameName Error "Random operation"');
   }
+
   return [answer, result];
 };
 
 const checkingUserResponseCalc = (number1) => (number2) => {
   const quest = randomOperation(number1)(number2);
-
   console.log(`Question: ${quest[0]}`);
   const message = lib.question();
-
 
   if (Number(message) === quest[1]) {
     console.log('Correct!');
