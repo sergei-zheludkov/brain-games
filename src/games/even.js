@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as lib from '../lib/lib';
 
-const checkingUserResponse = (number) => {
+const checkingUserResponseEven = (number) => {
   console.log(`Question: ${number}`);
   const message = lib.question();
   if ((number % 2 === 0 && message === 'yes') || (number % 2 !== 0 && message === 'no')) {
@@ -17,4 +17,4 @@ const checkingUserResponse = (number) => {
   return true;
 };
 
-export default checkingUserResponse;
+export default checkingUserResponseEven;

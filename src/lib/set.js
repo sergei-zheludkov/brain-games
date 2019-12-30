@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import checkingUserResponse from '../games/even';
+import checkingUserResponseEven from '../games/even';
+import checkingUserResponseCalc from '../games/calc';
 import * as lib from './lib';
 
 
@@ -23,10 +24,10 @@ export const gameDescription = (gameName) => {
 export const gameCall = (gameName) => {
   switch (gameName) {
     case 'even':
-      return checkingUserResponse(lib.numberRandom());
+      return checkingUserResponseEven(lib.numberRandom());
 
     case 'calc':
-      return false;
+      return checkingUserResponseCalc(lib.numberRandom())(lib.numberRandom());
 
     default:
       return console.log('GameName Error "Call"');
