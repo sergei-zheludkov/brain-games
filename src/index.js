@@ -6,9 +6,7 @@ const cycleOfQuestions = (gameName) => {
   console.log(`${lib.greeting}\n${set.gameDescription(gameName)}\n`);
   const userName = lib.userName();
   console.log(`Hello, ${userName}!\n`);
-
   const check = (name) => set.gameCall(name);
-
   const win = `Congratulations, ${userName}.`;
   const lose = `Let's try again, ${userName}.`;
 
@@ -18,6 +16,7 @@ const cycleOfQuestions = (gameName) => {
       return lose;
     }
   }
+  
   return win;
 };
 

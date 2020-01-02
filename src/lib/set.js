@@ -3,11 +3,13 @@ import checkingUserResponseEven from '../games/even';
 import checkingUserResponseCalc from '../games/calc';
 import checkingUserResponseGcd from '../games/gcd';
 import checkingUserResponseProgression from '../games/progression';
+import checkingUserResponsePrime from '../games/prime';
 import * as lib from './lib';
 
 
 export const gameDescription = (gameName) => {
   let description;
+
   switch (gameName) {
     case 'even':
       description = 'Answer "yes" if the number is even, otherwise answer "no"';
@@ -25,9 +27,14 @@ export const gameDescription = (gameName) => {
       description = 'What number is missing in the progression?';
       break;
 
+    case 'prime':
+      description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+      break;
+
     default:
       return console.log('GameName Error "Description"');
   }
+
   return description;
 };
 
@@ -37,13 +44,16 @@ export const gameCall = (gameName) => {
       return checkingUserResponseEven(lib.getRandomInt(100) + 1);
 
     case 'calc':
-      return checkingUserResponseCalc(lib.getRandomInt(100))(lib.getRandomInt(100));
+      return checkingUserResponseCalc(lib.getRandomInt(100), lib.getRandomInt(100));
 
     case 'gcd':
-      return checkingUserResponseGcd(lib.getRandomInt(100) + 1)(lib.getRandomInt(100) + 1);
+      return checkingUserResponseGcd(lib.getRandomInt(100) + 1, lib.getRandomInt(100) + 1);
 
     case 'progression':
       return checkingUserResponseProgression(lib.getRandomInt(10));
+
+    case 'prime':
+      return checkingUserResponsePrime(lib.getRandomInt(100) + 1);
 
     default:
       return console.log('GameName Error "Call"');

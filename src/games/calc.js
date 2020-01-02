@@ -1,46 +1,47 @@
 #!/usr/bin/env node
 import * as lib from '../lib/lib';
 
-const randomOperation = (operand1) => (operand2) => {
+const randomOperation = (operand1, operand2) => {
   const random = lib.getRandomInt(3);
-  let answer;
-  let result;
+  let question;
+  let resultOfOperation;
 
   switch (random) {
     case 0:
-      answer = `${operand1} + ${operand2}`;
-      result = operand1 + operand2;
+      question = `${operand1} + ${operand2}`;
+      resultOfOperation = operand1 + operand2;
       break;
 
     case 1:
-      answer = `${operand1} - ${operand2}`;
-      result = operand1 - operand2;
+      question = `${operand1} - ${operand2}`;
+      resultOfOperation = operand1 - operand2;
       break;
 
     case 2:
-      answer = `${operand1} * ${operand2}`;
-      result = operand1 * operand2;
+      question = `${operand1} * ${operand2}`;
+      resultOfOperation = operand1 * operand2;
       break;
 
     default:
       return console.log('GameName Error "Random operation"');
   }
 
-  return [answer, result];
+  return [question, resultOfOperation];
 };
 
-const checkingUserResponseCalc = (number1) => (number2) => {
-  const quest = randomOperation(number1)(number2);
-  console.log(`Question: ${quest[0]}`);
-  const message = lib.question();
+const checkingUserResponseCalc = (number1, number2) => {
+  const questionToUser = randomOperation(number1, number2);
+  console.log(`Question: ${questionToUser[0]}`);
+  const userAnswer = lib.question();
 
-  if (Number(message) === quest[1]) {
+  if (Number(userAnswer) === questionToUser[1]) {
     console.log('Correct!');
   }
-  if (Number(message) !== quest[1]) {
-    console.log(`'${message}' is wrong answer ;(. Correct answer was '${quest[1]}'.`);
+  if (Number(userAnswer) !== questionToUser[1]) {
+    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${questionToUser[1]}'.`);
     return false;
   }
+
   return true;
 };
 
