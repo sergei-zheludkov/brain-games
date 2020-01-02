@@ -16,7 +16,7 @@ const cycleOfQuestions = (gameName) => {
       return lose;
     }
   }
-  
+
   return win;
 };
 
