@@ -2,7 +2,7 @@
 import * as lib from '../lib/lib';
 
 const divider = (a) => (b) => {
-  let result = 0;
+  let result;
   if (a % b === 0) {
     result = b;
   } else {

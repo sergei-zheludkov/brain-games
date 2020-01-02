@@ -2,6 +2,7 @@
 import checkingUserResponseEven from '../games/even';
 import checkingUserResponseCalc from '../games/calc';
 import checkingUserResponseGcd from '../games/gcd';
+import checkingUserResponseProgression from '../games/progression';
 import * as lib from './lib';
 
 
@@ -20,6 +21,10 @@ export const gameDescription = (gameName) => {
       description = 'Find the greatest common divisor of given numbers';
       break;
 
+    case 'progression':
+      description = 'What number is missing in the progression?';
+      break;
+
     default:
       return console.log('GameName Error "Description"');
   }
@@ -36,6 +41,9 @@ export const gameCall = (gameName) => {
 
     case 'gcd':
       return checkingUserResponseGcd(lib.getRandomInt(100) + 1)(lib.getRandomInt(100) + 1);
+
+    case 'progression':
+      return checkingUserResponseProgression(lib.getRandomInt(10));
 
     default:
       return console.log('GameName Error "Call"');
