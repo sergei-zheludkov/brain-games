@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>Read Me</title>
+  </head>
+  <body>
 <style>
   .heading {
     margin-top: 24px;
@@ -49,4 +56,4 @@
 <div><script id="asciicast-tt2MVaivOOWfibPuNmHPzY6Dj" src="https://asciinema.org/a/tt2MVaivOOWfibPuNmHPzY6Dj.js" async></script></div>
 <br>
 <div><p class="namegame">Brain-prime</p></div>
-<div><script id="asciicast-3l4GvjNiNxoVZoAGSOe9xI1Kh" src="https://asciinema.org/a/3l4GvjNiNxoVZoAGSOe9xI1Kh.js" async></script></div>
+<div><script id="asciicast-3l4GvjNiNxoVZoAGSOe9xI1Kh" src="https://asciinema.org/a/3l4GvjNiNxoVZoAGSOe9xI1Kh.js" async></script></div></body></html>
