@@ -1,5 +1,8 @@
-#!/usr/bin/env node
+import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
+import cycleOfQuestions from '../index';
+
+const question = () => readlineSync.question('You answer: ');
 
 const greatestCommonDivisor = (a, b) => {
   let result;
@@ -13,27 +16,31 @@ const greatestCommonDivisor = (a, b) => {
   return result;
 };
 
-const checkingUserResponseGcd = (number1, number2) => {
+const checkingUserResponseGcd = () => () => {
   let result;
+  let correctAnswer;
+  const number1 = lib.getRandomInt(100) + 1;
+  const number2 = lib.getRandomInt(100) + 1;
 
   if (number1 > number2) {
-    result = greatestCommonDivisor(number1, number2);
+    correctAnswer = greatestCommonDivisor(number1, number2);
   } else {
-    result = greatestCommonDivisor(number2, number1);
+    correctAnswer = greatestCommonDivisor(number2, number1);
   }
 
   console.log(`Question: ${number1} ${number2}`);
-  const userAnswer = lib.question();
+  const userAnswer = question();
 
-  if (Number(userAnswer) === result) {
-    console.log('Correct!');
+  if (Number(userAnswer) === correctAnswer) {
+    result = true
   }
-  if (Number(userAnswer) !== result) {
-    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${result}'.`);
-    return false;
+  if (Number(userAnswer) !== correctAnswer) {
+    result = false
   }
 
-  return true;
+  return [result, userAnswer, correctAnswer];
 };
 
-export default checkingUserResponseGcd;
+const callGameGcd = () => cycleOfQuestions(checkingUserResponseGcd(), 'gcd');
+
+export default callGameGcd();

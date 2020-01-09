@@ -1,5 +1,8 @@
-#!/usr/bin/env node
+import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
+import cycleOfQuestions from '../index';
+
+const question = () => readlineSync.question('You answer: ');
 
 const isPrime = (number) => {
   const divider = Math.ceil(number / 2);
@@ -17,23 +20,28 @@ const isPrime = (number) => {
   return iter(number, divider);
 };
 
-const checkingUserResponsePrime = (number) => {
-  const result = isPrime(number);
+const checkingUserResponsePrime = () => () => {
+  const number = lib.getRandomInt(100) + 1;
+  const resultIsPrime = isPrime(number);
   console.log(`Question: ${number}`);
-  const userAnswer = lib.question();
+  const userAnswer = question();
+  let result;
+  let correctAnswer;
 
-  if ((userAnswer === 'yes' && result === true) || (userAnswer === 'no' && result === false)) {
-    console.log('Correct!');
+  if ((userAnswer === 'yes' && resultIsPrime === true) || (userAnswer === 'no' && resultIsPrime === false)) {
+    result = true;  
   }
-  if (userAnswer !== 'yes' && result === true) {
-    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was 'yes'.`);
-    return false;
-  } if (userAnswer !== 'no' && result === false) {
-    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was 'no'.`);
-    return false;
+  if (userAnswer !== 'yes' && resultIsPrime === true) {
+    result = false;
+    correctAnswer = 'yes';
+  } if (userAnswer !== 'no' && resultIsPrime === false) {
+    result = false;
+    correctAnswer = 'no';
   }
 
-  return true;
+  return [result, userAnswer, correctAnswer];
 };
 
-export default checkingUserResponsePrime;
+const callGamePrime = () => cycleOfQuestions(checkingUserResponsePrime(), 'prime');
+
+export default callGamePrime();

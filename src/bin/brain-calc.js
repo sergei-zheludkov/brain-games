@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import cycleOfQuestions from '../index';
+import callGameCalc from '../games/calc';
 
-console.log(cycleOfQuestions('calc'));
+callGameCalc;

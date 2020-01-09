@@ -1,5 +1,8 @@
-#!/usr/bin/env node
+import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
+import cycleOfQuestions from '../index';
+
+const question = () => readlineSync.question('You answer: ');
 
 const randomOperation = (operand1, operand2) => {
   const random = lib.getRandomInt(3);
@@ -29,20 +32,26 @@ const randomOperation = (operand1, operand2) => {
   return [question, resultOfOperation];
 };
 
-const checkingUserResponseCalc = (number1, number2) => {
+const checkingUserResponseCalc = () => () => {
+  const number1 = lib.getRandomInt(100);
+  const number2 = lib.getRandomInt(100);
   const questionToUser = randomOperation(number1, number2);
   console.log(`Question: ${questionToUser[0]}`);
-  const userAnswer = lib.question();
-
+  const userAnswer = question();
+  let result;
+  let correctAnswer;
+  
   if (Number(userAnswer) === questionToUser[1]) {
-    console.log('Correct!');
+    result = true;
   }
   if (Number(userAnswer) !== questionToUser[1]) {
-    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${questionToUser[1]}'.`);
-    return false;
+    correctAnswer = questionToUser[1];
+    result = false;
   }
 
-  return true;
+  return [result, userAnswer, correctAnswer];
 };
 
-export default checkingUserResponseCalc;
+const callGameCalc = () => cycleOfQuestions(checkingUserResponseCalc(), 'calc');
+
+export default callGameCalc();

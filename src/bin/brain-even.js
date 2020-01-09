@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import cycleOfQuestions from '../index';
+import callGameEven from '../games/even';
 
-console.log(cycleOfQuestions('even'));
+callGameEven;

@@ -1,5 +1,8 @@
-#!/usr/bin/env node
+import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
+import cycleOfQuestions from '../index';
+
+const question = () => readlineSync.question('You answer: ');
 
 const progerssion = (startNumber, step, shadowNumber) => {
   let out = '';
@@ -20,22 +23,26 @@ const progerssion = (startNumber, step, shadowNumber) => {
   return [out, result];
 };
 
-const checkingUserResponseProgression = (number) => {
+const checkingUserResponseProgression = () => () => {
+  const number = lib.getRandomInt(10);
   const randomStepProgression = lib.getRandomInt(9) + 1;
   const randomShadowNumber = lib.getRandomInt(9) + 1;
   const questionToUser = progerssion(number, randomStepProgression, randomShadowNumber);
   console.log(`Question: ${questionToUser[0]}`);
-  const userAnswer = lib.question();
+  const userAnswer = question();
+  let result;
+  let correctAnswer = questionToUser[1];
 
   if (Number(userAnswer) === questionToUser[1]) {
-    console.log('Correct!');
+    result = true;
   }
   if (Number(userAnswer) !== questionToUser[1]) {
-    console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${questionToUser[1]}'.`);
-    return false;
+    result = false;
   }
 
-  return true;
+  return [result, userAnswer, correctAnswer];
 };
 
-export default checkingUserResponseProgression;
+const callGameProgression = () => cycleOfQuestions(checkingUserResponseProgression(), 'progression');
+
+export default callGameProgression();

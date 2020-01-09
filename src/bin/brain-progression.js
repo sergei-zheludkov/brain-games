@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import cycleOfQuestions from '../index';
+import callGameProgression from '../games/progression';
 
-console.log(cycleOfQuestions('progression'));
+callGameProgression;

@@ -1,22 +1,31 @@
-#!/usr/bin/env node
+import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
+import cycleOfQuestions from '../index';
 
-const checkingUserResponseEven = (number) => {
+const question = () => readlineSync.question('You answer: ');
+ 
+const checkingUserResponseEven = () => () => {
+  const random = () => lib.getRandomInt(100) + 1;
+  const number = random();
   console.log(`Question: ${number}`);
-  const answer = lib.question();
+  const userAnswer = question();
+  let result;
+  let correctAnswer;
 
-  if ((number % 2 === 0 && answer === 'yes') || (number % 2 !== 0 && answer === 'no')) {
-    console.log('Correct!');
+  if ((number % 2 === 0 && userAnswer === 'yes') || (number % 2 !== 0 && userAnswer === 'no')) {
+    result = true;
   }
-  if (number % 2 === 0 && answer !== 'yes') {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was 'yes'.`);
-    return false;
-  } if (number % 2 !== 0 && answer !== 'no') {
-    console.log(`'${answer}' is wrong answer ;(. Correct answer was 'no'.`);
-    return false;
+  if (number % 2 === 0 && userAnswer !== 'yes') {
+    result = false;
+    correctAnswer = 'yes';
+  } if (number % 2 !== 0 && userAnswer !== 'no') {
+    result = false;
+    correctAnswer = 'no';
   }
 
-  return true;
+  return [result, userAnswer, correctAnswer];
 };
 
-export default checkingUserResponseEven;
+const callGameEven = () => cycleOfQuestions(checkingUserResponseEven(), 'even');
+
+export default callGameEven();

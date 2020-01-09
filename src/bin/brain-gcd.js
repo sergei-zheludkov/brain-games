@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import cycleOfQuestions from '../index';
+import callGameGcd from '../games/gcd';
 
-console.log(cycleOfQuestions('gcd'));
+callGameGcd;

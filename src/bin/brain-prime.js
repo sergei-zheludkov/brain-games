@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import cycleOfQuestions from '../index';
+import callGamePrime from '../games/prime';
 
-console.log(cycleOfQuestions('prime'));
+callGamePrime;
