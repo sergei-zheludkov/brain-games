@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
 import cycleOfQuestions from '../index';
@@ -32,15 +33,13 @@ const checkingUserResponseGcd = () => () => {
   const userAnswer = question();
 
   if (Number(userAnswer) === correctAnswer) {
-    result = true
+    result = true;
   }
   if (Number(userAnswer) !== correctAnswer) {
-    result = false
+    result = false;
   }
 
   return [result, userAnswer, correctAnswer];
 };
 
-const callGameGcd = () => cycleOfQuestions(checkingUserResponseGcd(), 'gcd');
-
-export default callGameGcd();
+export const callGameGcd = () => cycleOfQuestions(checkingUserResponseGcd(), 'gcd');

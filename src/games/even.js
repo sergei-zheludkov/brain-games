@@ -1,9 +1,10 @@
+/* eslint-disable import/prefer-default-export */
 import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
 import cycleOfQuestions from '../index';
 
 const question = () => readlineSync.question('You answer: ');
- 
+
 const checkingUserResponseEven = () => () => {
   const random = () => lib.getRandomInt(100) + 1;
   const number = random();
@@ -26,6 +27,4 @@ const checkingUserResponseEven = () => () => {
   return [result, userAnswer, correctAnswer];
 };
 
-const callGameEven = () => cycleOfQuestions(checkingUserResponseEven(), 'even');
-
-export default callGameEven();
+export const callGameEven = () => cycleOfQuestions(checkingUserResponseEven(), 'even');

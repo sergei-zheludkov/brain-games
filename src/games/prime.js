@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
 import cycleOfQuestions from '../index';
@@ -29,7 +30,7 @@ const checkingUserResponsePrime = () => () => {
   let correctAnswer;
 
   if ((userAnswer === 'yes' && resultIsPrime === true) || (userAnswer === 'no' && resultIsPrime === false)) {
-    result = true;  
+    result = true;
   }
   if (userAnswer !== 'yes' && resultIsPrime === true) {
     result = false;
@@ -42,6 +43,4 @@ const checkingUserResponsePrime = () => () => {
   return [result, userAnswer, correctAnswer];
 };
 
-const callGamePrime = () => cycleOfQuestions(checkingUserResponsePrime(), 'prime');
-
-export default callGamePrime();
+export const callGamePrime = () => cycleOfQuestions(checkingUserResponsePrime(), 'prime');

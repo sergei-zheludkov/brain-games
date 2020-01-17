@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import readlineSync from 'readline-sync';
 import * as lib from '../lib/lib';
 import cycleOfQuestions from '../index';
@@ -31,7 +32,7 @@ const checkingUserResponseProgression = () => () => {
   console.log(`Question: ${questionToUser[0]}`);
   const userAnswer = question();
   let result;
-  let correctAnswer = questionToUser[1];
+  const correctAnswer = questionToUser[1];
 
   if (Number(userAnswer) === questionToUser[1]) {
     result = true;
@@ -43,6 +44,4 @@ const checkingUserResponseProgression = () => () => {
   return [result, userAnswer, correctAnswer];
 };
 
-const callGameProgression = () => cycleOfQuestions(checkingUserResponseProgression(), 'progression');
-
-export default callGameProgression();
+export const callGameProgression = () => cycleOfQuestions(checkingUserResponseProgression(), 'progression');
