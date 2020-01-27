@@ -1,55 +1,42 @@
 /* eslint-disable import/prefer-default-export */
-import readlineSync from 'readline-sync';
-import * as lib from '../lib/lib';
+import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
-const question = () => readlineSync.question('You answer: ');
+const description = 'What is the result of the expression?';
 
-const randomOperation = (operand1, operand2) => {
-  const random = lib.getRandomInt(3);
-  let operation;
+const randomOperation = (operation, operand1, operand2) => {
   let resultOfOperation;
 
-  switch (random) {
-    case 0:
-      operation = `${operand1} + ${operand2}`;
+  switch (operation) {
+    case '+':
       resultOfOperation = operand1 + operand2;
       break;
 
-    case 1:
-      operation = `${operand1} - ${operand2}`;
+    case '-':
       resultOfOperation = operand1 - operand2;
       break;
 
-    case 2:
-      operation = `${operand1} * ${operand2}`;
+    case '*':
       resultOfOperation = operand1 * operand2;
       break;
 
     default:
-      return console.log('GameName Error "Random operation"');
+      return false;
   }
 
-  return [operation, resultOfOperation];
+  return resultOfOperation;
 };
 
 const checkingUserResponseCalc = () => () => {
-  const number1 = lib.getRandomInt(100);
-  const number2 = lib.getRandomInt(100);
-  const questionToUser = randomOperation(number1, number2);
-  console.log(`Question: ${questionToUser[0]}`);
-  const userAnswer = question();
-  let result;
-  let correctAnswer;
+  const number1 = getRandomInt(100);
+  const number2 = getRandomInt(100);
+  const operations = '+-*';
+  const randomOperator = operations[getRandomInt(operations.length - 1)];
+  const operation = randomOperation(randomOperator, number1, number2);
+  const questionToUser = `${number1} ${randomOperator} ${number2}`;
+  const correctAnswer = operation;
 
-  if (Number(userAnswer) === questionToUser[1]) {
-    result = true;
-  }
-  if (Number(userAnswer) !== questionToUser[1]) {
-    [correctAnswer, result] = [questionToUser[1], false];
-  }
-
-  return [result, userAnswer, correctAnswer];
+  return [questionToUser, String(correctAnswer)];
 };
 
-export const callGameCalc = () => cycleOfQuestions(checkingUserResponseCalc(), 'calc');
+export const callGameCalc = () => cycleOfQuestions(checkingUserResponseCalc(), description);

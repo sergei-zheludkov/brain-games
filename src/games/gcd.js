@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import readlineSync from 'readline-sync';
-import * as lib from '../lib/lib';
+import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
-const question = () => readlineSync.question('You answer: ');
+const description = 'Find the greatest common divisor of given numbers';
 
 const greatestCommonDivisor = (a, b) => {
   let result;
@@ -18,10 +17,10 @@ const greatestCommonDivisor = (a, b) => {
 };
 
 const checkingUserResponseGcd = () => () => {
-  let result;
   let correctAnswer;
-  const number1 = lib.getRandomInt(100) + 1;
-  const number2 = lib.getRandomInt(100) + 1;
+  const number1 = getRandomInt(100) + 1;
+  const number2 = getRandomInt(100) + 1;
+  const questionToUser = `${number1}  ${number2}`;
 
   if (number1 > number2) {
     correctAnswer = greatestCommonDivisor(number1, number2);
@@ -29,17 +28,7 @@ const checkingUserResponseGcd = () => () => {
     correctAnswer = greatestCommonDivisor(number2, number1);
   }
 
-  console.log(`Question: ${number1} ${number2}`);
-  const userAnswer = question();
-
-  if (Number(userAnswer) === correctAnswer) {
-    result = true;
-  }
-  if (Number(userAnswer) !== correctAnswer) {
-    result = false;
-  }
-
-  return [result, userAnswer, correctAnswer];
+  return [questionToUser, String(correctAnswer)];
 };
 
-export const callGameGcd = () => cycleOfQuestions(checkingUserResponseGcd(), 'gcd');
+export const callGameGcd = () => cycleOfQuestions(checkingUserResponseGcd(), description);

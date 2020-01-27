@@ -1,19 +1,18 @@
 /* eslint-disable import/prefer-default-export */
-import readlineSync from 'readline-sync';
-import * as lib from '../lib/lib';
+import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
-const question = () => readlineSync.question('You answer: ');
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const isPrime = (number) => {
   const divider = Math.ceil(number / 2);
 
   const iter = (num, div) => {
     if (div === 1) {
-      return true;
+      return 'yes';
     }
     if (num % div === 0) {
-      return false;
+      return 'no';
     }
     return iter(num, div - 1);
   };
@@ -21,26 +20,12 @@ const isPrime = (number) => {
   return iter(number, divider);
 };
 
+
 const checkingUserResponsePrime = () => () => {
-  const number = lib.getRandomInt(100) + 1;
-  const resultIsPrime = isPrime(number);
-  console.log(`Question: ${number}`);
-  const userAnswer = question();
-  let result;
-  let correctAnswer;
+  const questionToUser = getRandomInt(100) + 1;
+  const correctAnswer = isPrime(questionToUser);
 
-  if ((userAnswer === 'yes' && resultIsPrime === true) || (userAnswer === 'no' && resultIsPrime === false)) {
-    result = true;
-  }
-  if (userAnswer !== 'yes' && resultIsPrime === true) {
-    result = false;
-    correctAnswer = 'yes';
-  } if (userAnswer !== 'no' && resultIsPrime === false) {
-    result = false;
-    correctAnswer = 'no';
-  }
-
-  return [result, userAnswer, correctAnswer];
+  return [questionToUser, correctAnswer];
 };
 
-export const callGamePrime = () => cycleOfQuestions(checkingUserResponsePrime(), 'prime');
+export const callGamePrime = () => cycleOfQuestions(checkingUserResponsePrime(), description);

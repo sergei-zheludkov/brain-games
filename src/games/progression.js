@@ -1,9 +1,8 @@
 /* eslint-disable import/prefer-default-export */
-import readlineSync from 'readline-sync';
-import * as lib from '../lib/lib';
+import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
-const question = () => readlineSync.question('You answer: ');
+const description = 'What number is missing in the progression?';
 
 const progerssion = (startNumber, step, shadowNumber) => {
   let out = '';
@@ -24,24 +23,15 @@ const progerssion = (startNumber, step, shadowNumber) => {
   return [out, result];
 };
 
-const checkingUserResponseProgression = () => () => {
-  const number = lib.getRandomInt(10);
-  const randomStepProgression = lib.getRandomInt(9) + 1;
-  const randomShadowNumber = lib.getRandomInt(9) + 1;
-  const questionToUser = progerssion(number, randomStepProgression, randomShadowNumber);
-  console.log(`Question: ${questionToUser[0]}`);
-  const userAnswer = question();
-  let result;
-  const correctAnswer = questionToUser[1];
+const checkingUserResponseProgr = () => () => {
+  const number = getRandomInt(10);
+  const randomStepProgression = getRandomInt(9) + 1;
+  const randomShadowNumber = getRandomInt(9) + 1;
+  const operation = progerssion(number, randomStepProgression, randomShadowNumber);
+  const questionToUser = operation[0];
+  const correctAnswer = operation[1];
 
-  if (Number(userAnswer) === questionToUser[1]) {
-    result = true;
-  }
-  if (Number(userAnswer) !== questionToUser[1]) {
-    result = false;
-  }
-
-  return [result, userAnswer, correctAnswer];
+  return [questionToUser, String(correctAnswer)];
 };
 
-export const callGameProgression = () => cycleOfQuestions(checkingUserResponseProgression(), 'progression');
+export const callGameProgression = () => cycleOfQuestions(checkingUserResponseProgr(), description);

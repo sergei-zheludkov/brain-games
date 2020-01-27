@@ -1,30 +1,27 @@
 /* eslint-disable import/prefer-default-export */
-import readlineSync from 'readline-sync';
-import * as lib from '../lib/lib';
+import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
-const question = () => readlineSync.question('You answer: ');
+const description = 'Answer "yes" if the number is even, otherwise answer "no"';
 
-const checkingUserResponseEven = () => () => {
-  const random = () => lib.getRandomInt(100) + 1;
-  const number = random();
-  console.log(`Question: ${number}`);
-  const userAnswer = question();
-  let result;
-  let correctAnswer;
+const isEven = (number) => {
+  let answer;
 
-  if ((number % 2 === 0 && userAnswer === 'yes') || (number % 2 !== 0 && userAnswer === 'no')) {
-    result = true;
+  if (number % 2 === 0) {
+    answer = 'yes';
   }
-  if (number % 2 === 0 && userAnswer !== 'yes') {
-    result = false;
-    correctAnswer = 'yes';
-  } if (number % 2 !== 0 && userAnswer !== 'no') {
-    result = false;
-    correctAnswer = 'no';
+  if (number % 2 !== 0) {
+    answer = 'no';
   }
 
-  return [result, userAnswer, correctAnswer];
+  return answer;
 };
 
-export const callGameEven = () => cycleOfQuestions(checkingUserResponseEven(), 'even');
+const checkingUserResponseEven = () => () => {
+  const questionToUser = getRandomInt(100) + 1;
+  const correctAnswer = isEven(questionToUser);
+
+  return [questionToUser, correctAnswer];
+};
+
+export const callGameEven = () => cycleOfQuestions(checkingUserResponseEven(), description);
