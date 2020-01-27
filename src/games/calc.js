@@ -31,7 +31,7 @@ const checkingUserResponseCalc = () => () => {
   const number1 = getRandomInt(100);
   const number2 = getRandomInt(100);
   const operations = '+-*';
-  const randomOperator = operations[getRandomInt(operations.length - 1)];
+  const randomOperator = operations[getRandomInt(operations.length)];
   const operation = randomOperation(randomOperator, number1, number2);
   const questionToUser = `${number1} ${randomOperator} ${number2}`;
   const correctAnswer = operation;
