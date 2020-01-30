@@ -1,15 +1,15 @@
-/* eslint-disable import/prefer-default-export */
 import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
 const description = 'What number is missing in the progression?';
+const min = 1;
+const max = 10;
 
-const progerssion = (startNumber, step, shadowNumber) => {
+const progerssion = (step, shadowNumber) => {
   let out = '';
   let result;
-  let number = startNumber;
 
-  for (let counter = 10; counter !== 0; counter -= 1) {
+  for (let counter = max, number = getRandomInt(0, max); counter !== 0; counter -= 1) {
     if (counter === shadowNumber) {
       out += '.. ';
       number += step;
@@ -23,15 +23,15 @@ const progerssion = (startNumber, step, shadowNumber) => {
   return [out, result];
 };
 
-const checkingUserResponseProgr = () => () => {
-  const number = getRandomInt(10);
-  const randomStepProgression = getRandomInt(9) + 1;
-  const randomShadowNumber = getRandomInt(9) + 1;
-  const operation = progerssion(number, randomStepProgression, randomShadowNumber);
+const getQuestAndAnsw = () => {
+  const randomStepProgression = getRandomInt(min, max);
+  const randomShadowNumber = getRandomInt(min, max);
+  const operation = progerssion(randomStepProgression, randomShadowNumber);
   const questionToUser = operation[0];
   const correctAnswer = operation[1];
 
   return [questionToUser, String(correctAnswer)];
 };
 
-export const callGameProgression = () => cycleOfQuestions(checkingUserResponseProgr(), description);
+const callGameProgression = () => cycleOfQuestions(getQuestAndAnsw, description);
+export default callGameProgression;

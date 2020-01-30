@@ -9,8 +9,8 @@ const cycleOfQuestions = (gameScript, gameDescription) => {
   const userName = questionUserName();
   console.log(`Hello, ${userName}!\n`);
 
-  const win = `Congratulations, ${userName}.`;
-  const lose = `Let's try again, ${userName}.`;
+  const win = (`Congratulations, ${userName}.`);
+  const lose = (`Let's try again, ${userName}.`);
 
   for (let counter = 0; counter < 3; counter += 1) {
     const result = gameScript();
@@ -23,11 +23,11 @@ const cycleOfQuestions = (gameScript, gameDescription) => {
     }
     if (correctAnswer !== userAnswer) {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-      return console.log(lose);
+      console.log(lose);
+      return;
     }
   }
-
-  return console.log(win);
+  console.log(win);
 };
 
 export default cycleOfQuestions;

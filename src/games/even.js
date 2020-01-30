@@ -1,27 +1,23 @@
-/* eslint-disable import/prefer-default-export */
 import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
 const description = 'Answer "yes" if the number is even, otherwise answer "no"';
+const min = 1;
+const max = 100;
 
 const isEven = (number) => {
-  let answer;
-
   if (number % 2 === 0) {
-    answer = 'yes';
+    return true;
   }
-  if (number % 2 !== 0) {
-    answer = 'no';
-  }
-
-  return answer;
+  return false;
 };
 
-const checkingUserResponseEven = () => () => {
-  const questionToUser = getRandomInt(100) + 1;
-  const correctAnswer = isEven(questionToUser);
+const getQuestAndAnsw = () => {
+  const questionToUser = getRandomInt(min, max);
+  const correctAnswer = isEven(questionToUser) ? 'yes' : 'no';
 
   return [questionToUser, correctAnswer];
 };
 
-export const callGameEven = () => cycleOfQuestions(checkingUserResponseEven(), description);
+const callGameEven = () => cycleOfQuestions(getQuestAndAnsw, description);
+export default callGameEven;

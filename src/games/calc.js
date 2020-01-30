@@ -1,8 +1,11 @@
-/* eslint-disable import/prefer-default-export */
 import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
 const description = 'What is the result of the expression?';
+const min = 1;
+const max = 100;
+const operations = '+-*';
+
 
 const randomOperation = (operation, operand1, operand2) => {
   let resultOfOperation;
@@ -27,16 +30,15 @@ const randomOperation = (operation, operand1, operand2) => {
   return resultOfOperation;
 };
 
-const checkingUserResponseCalc = () => () => {
-  const number1 = getRandomInt(100);
-  const number2 = getRandomInt(100);
-  const operations = '+-*';
-  const randomOperator = operations[getRandomInt(operations.length)];
-  const operation = randomOperation(randomOperator, number1, number2);
+const getQuestAndAnsw = () => {
+  const number1 = getRandomInt(min, max);
+  const number2 = getRandomInt(min, max);
+  const randomOperator = operations[getRandomInt(0, operations.length)];
+  const correctAnswer = randomOperation(randomOperator, number1, number2);
   const questionToUser = `${number1} ${randomOperator} ${number2}`;
-  const correctAnswer = operation;
 
   return [questionToUser, String(correctAnswer)];
 };
 
-export const callGameCalc = () => cycleOfQuestions(checkingUserResponseCalc(), description);
+const callGameCalc = () => cycleOfQuestions(getQuestAndAnsw, description);
+export default callGameCalc;

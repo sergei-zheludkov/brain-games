@@ -1,18 +1,19 @@
-/* eslint-disable import/prefer-default-export */
 import getRandomInt from '../lib/lib';
 import cycleOfQuestions from '../index';
 
 const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const min = 1;
+const max = 100;
 
 const isPrime = (number) => {
   const divider = Math.ceil(number / 2);
 
   const iter = (num, div) => {
     if (div === 1) {
-      return 'yes';
+      return true;
     }
     if (num % div === 0) {
-      return 'no';
+      return false;
     }
     return iter(num, div - 1);
   };
@@ -21,11 +22,12 @@ const isPrime = (number) => {
 };
 
 
-const checkingUserResponsePrime = () => () => {
-  const questionToUser = getRandomInt(100) + 1;
-  const correctAnswer = isPrime(questionToUser);
+const getQuestAndAnsw = () => {
+  const questionToUser = getRandomInt(min, max);
+  const correctAnswer = isPrime(questionToUser) ? 'yes' : 'no';
 
   return [questionToUser, correctAnswer];
 };
 
-export const callGamePrime = () => cycleOfQuestions(checkingUserResponsePrime(), description);
+const callGamePrime = () => cycleOfQuestions(getQuestAndAnsw, description);
+export default callGamePrime;
