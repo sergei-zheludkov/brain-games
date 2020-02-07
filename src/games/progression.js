@@ -5,32 +5,23 @@ const description = 'What number is missing in the progression?';
 const min = 1;
 const max = 10;
 
-const progerssion = (step, shadowNumber) => {
-  let out = '';
-  let result;
+const getQuestAndAnsw = () => {
+  const questionToUser = [];
+  const number = getRandomInt(0, max);
+  const stepProgression = getRandomInt(min, max);
+  const shadowNumber = getRandomInt(min, max);
+  const correctAnswer = String(number + stepProgression * shadowNumber);
 
-  for (let counter = max, number = getRandomInt(0, max); counter !== 0; counter -= 1) {
+  for (let counter = 0; counter < max; counter += 1) {
     if (counter === shadowNumber) {
-      out += '.. ';
-      number += step;
-      result = number;
+      questionToUser.push('..');
     } else {
-      number += step;
-      out += `${number} `;
+      const currentNumber = number + stepProgression * counter;
+      questionToUser.push(currentNumber);
     }
   }
 
-  return [out, result];
-};
-
-const getQuestAndAnsw = () => {
-  const randomStepProgression = getRandomInt(min, max);
-  const randomShadowNumber = getRandomInt(min, max);
-  const operation = progerssion(randomStepProgression, randomShadowNumber);
-  const questionToUser = operation[0];
-  const correctAnswer = operation[1];
-
-  return [questionToUser, String(correctAnswer)];
+  return [questionToUser.join(' '), correctAnswer];
 };
 
 const callGameProgression = () => cycleOfQuestions(getQuestAndAnsw, description);
