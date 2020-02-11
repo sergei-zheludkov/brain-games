@@ -10,7 +10,6 @@ const isEven = (number) => number % 2 === 0;
 const getQuestAndAnsw = () => {
   const questionToUser = getRandomInt(min, max);
   const correctAnswer = isEven(questionToUser) ? 'yes' : 'no';
-
   return [questionToUser, correctAnswer];
 };
 

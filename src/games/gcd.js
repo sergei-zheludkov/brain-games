@@ -9,6 +9,7 @@ const getGreatestCommonDivisor = (a, b) => {
   let result;
   let bigger = a;
   let lesser = b;
+
   if (a < b) {
     [bigger, lesser] = [lesser, bigger];
   }

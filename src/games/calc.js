@@ -6,7 +6,6 @@ const min = 1;
 const max = 100;
 const operations = '+-*';
 
-
 const getOperation = (operation, operand1, operand2) => {
   let resultOfOperation;
 
@@ -36,7 +35,6 @@ const getQuestAndAnsw = () => {
   const randomOperator = operations[getRandomInt(0, operations.length - 1)];
   const correctAnswer = getOperation(randomOperator, number1, number2);
   const questionToUser = `${number1} ${randomOperator} ${number2}`;
-
   return [questionToUser, String(correctAnswer)];
 };
 
