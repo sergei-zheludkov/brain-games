@@ -23,7 +23,6 @@ const makeSeriesOfQuestions = (getGameScript, gameDescription) => {
     }
   }
   console.log(`Congratulations, ${userName}.`);
-  return;
 };
 
 export default makeSeriesOfQuestions;
