@@ -5,7 +5,7 @@ const description = 'Answer "yes" if the number is even, otherwise answer "no"';
 const min = 1;
 const max = 100;
 
-const isEven = (number) => number % 2 === 0;
+export const isEven = (number) => number % 2 === 0;
 
 const getQuestAndAnsw = () => {
   const questionToUser = getRandomInt(min, max);

@@ -5,7 +5,7 @@ const description = 'Find the greatest common divisor of given numbers';
 const min = 1;
 const max = 100;
 
-const getGreatestCommonDivisor = (a, b) => {
+export const getGreatestCommonDivisor = (a, b) => {
   let result;
   let bigger = a;
   let lesser = b;
