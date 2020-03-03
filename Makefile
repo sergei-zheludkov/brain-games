@@ -13,11 +13,11 @@ brain-calc:
 brain-even:
 	npx babel-node src/bin/brain-even.js
 
-unstall:
+install:
 	npm install
 
-start:
-	npx babel-node src/bin/brain-games.js
+test:
+	npx jest
 
 publish:
 	npm publish --dry-run
