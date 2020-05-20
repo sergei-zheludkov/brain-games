@@ -5,21 +5,14 @@ const description = 'Find the greatest common divisor of given numbers';
 const min = 1;
 const max = 100;
 
+const changePlace = (a, b) => ((a < b) ? [b, a] : [a, b]);
+
 export const getGreatestCommonDivisor = (a, b) => {
-  let result;
-  let bigger = a;
-  let lesser = b;
-
-  if (a < b) {
-    [bigger, lesser] = [lesser, bigger];
-  }
+  const [bigger, lesser] = changePlace(a, b);
   if (bigger % lesser === 0) {
-    result = lesser;
-  } else {
-    result = getGreatestCommonDivisor(lesser, bigger % lesser);
+    return lesser;
   }
-
-  return result;
+  return getGreatestCommonDivisor(lesser, bigger % lesser);
 };
 
 const getQuestAndAnsw = () => {
@@ -30,5 +23,4 @@ const getQuestAndAnsw = () => {
   return [questionToUser, String(correctAnswer)];
 };
 
-const callGameGcd = () => makeSeriesOfQuestions(getQuestAndAnsw, description);
-export default callGameGcd;
+export default () => makeSeriesOfQuestions(getQuestAndAnsw, description);
